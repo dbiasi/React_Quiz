@@ -12,14 +12,54 @@
 /* ParametersForm.css */
 .form-group input,
 .form-group select {
-  width: 400px; /* Set the width of input and select elements */
-  max-width: 100%; /* Ensures responsiveness */
+  width: 100%; /* Default to full width on small devices */
+  max-width: 100%; /* Prevents the element from extending beyond its container */
   height: 40px; /* Increase the height of the input/select fields */
   border-radius: 5px; /* Add rounded corners */
   padding-left: 10px; /* Add space inside on the left */
   font-size: 18px;
   border: none; /* Remove the border */
   color: #333; /* Change text color to dark gray */
+}
+
+/* Medium devices (375px) */
+@media (min-width: 375px) {
+  .form-group input,
+  .form-group select {
+    width: 335px;
+  }
+}
+
+/* Large devices (425px) */
+@media (min-width: 425px) {
+  .form-group input,
+  .form-group select {
+    width: 385px;
+  }
+}
+
+/* Tablet (768px) */
+@media (min-width: 768px) {
+  .form-group input,
+  .form-group select {
+    width: 580px;
+  }
+}
+
+/* Laptop (1024px) */
+@media (min-width: 1024px) {
+  .form-group input,
+  .form-group select {
+    width: 580px;
+  }
+}
+
+/* Laptop L (1440px) */
+@media (min-width: 1440px) {
+  .form-group input,
+  .form-group select {
+    width: 580px;
+  }
 }
 
 /* Assuming this class is added to the button's container */

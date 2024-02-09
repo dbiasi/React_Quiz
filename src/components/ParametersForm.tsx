@@ -29,7 +29,9 @@ const ParametersForm = ({ startGame }: Props) => {
   // Handler for form submission
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    console.log("Why this is not working?");
     console.log(formData); // Process or send this data
+    startGame();
   };
 
   return (
@@ -80,7 +82,7 @@ const ParametersForm = ({ startGame }: Props) => {
         </select>
       </div>
       <div className="button-container">
-        <button className="buttonStart" type="submit" onClick={startGame}>
+        <button className="buttonStart" type="submit">
           Start
         </button>
       </div>
