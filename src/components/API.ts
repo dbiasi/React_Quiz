@@ -3,30 +3,33 @@
 import { shuffleArray } from "./utils";
 
 export type Question = {
-  category: string;
-  correct_answer: string;
-  difficulty: string;
-  incorrect_answers: string[];
-  question: string;
   type: string;
+  difficulty: string;
+  category: string;
+  question: string;
+  correct_answer: string;
+  incorrect_answers: string[];
 };
 
 export type QuestionState = Question & { answers: string[] };
 
-// Difficulty
-export enum Difficulty {
-  Any = "",
-  EASY = "easy",
-  MEDIUM = "medium",
-  HARD = "hard",
-}
-
-// Type:
-export enum TypeQuestion {
-  Any = "",
-  MultipleChoices = "multiple",
-  TrueOrFalse = "boolean",
-}
+export const fetchQuizQuestions = async (
+  amount: string,
+  category: string,
+  difficulty: string,
+  typeQuestion: string
+) => {
+  // Construct the API URL with the parameters
+  const apiUrl = `https://opentdb.com/api.php?amount=${amount}&category=${category}&difficulty=${difficulty}&type=${typeQuestion}`;
+  const data = await (await fetch(apiUrl)).json();
+  return data.results.map((question: Question) => ({
+    ...question,
+    answers: shuffleArray([
+      ...question.incorrect_answers,
+      question.correct_answer,
+    ]),
+  }));
+};
 
 // export async function fetchDataFromApi(
 //   amount: number,
@@ -56,20 +59,3 @@ export enum TypeQuestion {
 //     throw error;
 //   }
 // }
-
-export const fetchQuizQuestions = async (
-  amount: number,
-  difficulty: Difficulty,
-  typeQuestion: TypeQuestion
-) => {
-  // Construct the API URL with the parameters
-  const apiUrl = `https://opentdb.com/api.php?amount=${amount}&difficulty=${difficulty}&type=${typeQuestion}`;
-  const data = await (await fetch(apiUrl)).json();
-  return data.results.map((question: Question) => ({
-    ...question,
-    answers: shuffleArray([
-      ...question.incorrect_answers,
-      question.correct_answer,
-    ]),
-  }));
-};

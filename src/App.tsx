@@ -1,8 +1,7 @@
 import { useState } from "react";
 import QuestionCard from "./components/QuestionCard";
 import { fetchQuizQuestions } from "./components/API";
-import { QuestionState, Difficulty } from "./components/API";
-import { TypeQuestion } from "./components/API";
+import { QuestionState } from "./components/API";
 import { GlobalStyle, Wrapper } from "./App.styles";
 import ParametersForm from "./components/ParametersForm";
 
@@ -22,7 +21,15 @@ function App() {
   const [gameOver, setGameOver] = useState(true);
   const [finish, setFinish] = useState(false);
 
-  const TOTAL_QUESTIONS = 10;
+  // Initializing state for each form field
+  const [formData, setFormData] = useState({
+    numberOfQuestions: "10",
+    category: "",
+    difficulty: "",
+    type: "multiple",
+  });
+
+  const TOTAL_QUESTIONS = parseInt(formData.numberOfQuestions);
 
   // function to make the api call when the game starts
   const startTrivia = async () => {
@@ -32,9 +39,10 @@ function App() {
 
     // fetch the data newQuestion
     const newQuestions = await fetchQuizQuestions(
-      TOTAL_QUESTIONS,
-      Difficulty.EASY,
-      TypeQuestion.MultipleChoices
+      formData.numberOfQuestions,
+      formData.category,
+      formData.difficulty,
+      formData.type
     );
 
     setQuestions(newQuestions);
@@ -126,7 +134,11 @@ function App() {
         ) : null}
         {gameOver ? (
           <div>
-            <ParametersForm startGame={startTrivia}></ParametersForm>
+            <ParametersForm
+              startGame={startTrivia}
+              formData={formData}
+              setFormData={setFormData}
+            ></ParametersForm>
           </div>
         ) : null}
       </Wrapper>

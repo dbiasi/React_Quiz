@@ -1,20 +1,21 @@
-import React, { ChangeEvent, FormEvent, useState } from "react";
+import React, { ChangeEvent, FormEvent } from "react";
 import { categories } from "../assets/categoriesData";
 import "./ParametersForm.css";
 
 interface Props {
   startGame: () => void;
+  formData: FormData;
+  setFormData: React.Dispatch<React.SetStateAction<FormData>>;
 }
 
-const ParametersForm = ({ startGame }: Props) => {
-  // Initializing state for each form field
-  const [formData, setFormData] = useState({
-    numberOfQuestions: "10",
-    category: "any",
-    difficulty: "any",
-    type: "multipleChoice",
-  });
+export type FormData = {
+  numberOfQuestions: string;
+  category: string;
+  difficulty: string;
+  type: string;
+};
 
+const ParametersForm = ({ startGame, formData, setFormData }: Props) => {
   // Handler for form field changes
   const handleChange = (
     e: ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -41,6 +42,8 @@ const ParametersForm = ({ startGame }: Props) => {
         <input
           type="number"
           name="numberOfQuestions"
+          min="1"
+          max="10"
           value={formData.numberOfQuestions}
           onChange={handleChange}
         />
@@ -77,8 +80,8 @@ const ParametersForm = ({ startGame }: Props) => {
       <div className="form-group">
         <label>Select Type:</label>
         <select name="type" value={formData.type} onChange={handleChange}>
-          <option value="multipleChoice">Multiple Choice</option>
-          <option value="trueFalse">True/False</option>
+          <option value="multiple">Multiple Choice</option>
+          <option value="boolean">True/False</option>
         </select>
       </div>
       <div className="button-container">
