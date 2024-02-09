@@ -1,0 +1,42 @@
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px; /* Adjust spacing between each form group */
+}
+
+.form-group label {
+  margin-bottom: 3px; /* Adjust spacing between label and input */
+  color: white;
+}
+
+/* ParametersForm.css */
+.form-group input,
+.form-group select {
+  width: 400px; /* Set the width of input and select elements */
+  max-width: 100%; /* Ensures responsiveness */
+  height: 40px; /* Increase the height of the input/select fields */
+  border-radius: 5px; /* Add rounded corners */
+  padding-left: 10px; /* Add space inside on the left */
+  font-size: 18px;
+  border: none; /* Remove the border */
+  color: #333; /* Change text color to dark gray */
+}
+
+/* Assuming this class is added to the button's container */
+.button-container {
+  display: flex;
+  justify-content: center; /* Centers button horizontally */
+  margin-top: 20px; /* Adds space above the button */
+}
+
+.buttonStart {
+  cursor: pointer;
+  background: linear-gradient(180deg, #fff, #ffcc91);
+  border: 2px solid #d38558;
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.25);
+  border-radius: 10px;
+  height: 40px;
+  margin: 20px 0;
+  padding: 0 40px;
+  max-width: 200px;
+}

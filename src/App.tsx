@@ -4,6 +4,7 @@ import { fetchQuizQuestions } from "./components/API";
 import { QuestionState, Difficulty } from "./components/API";
 import { TypeQuestion } from "./components/API";
 import { GlobalStyle, Wrapper } from "./App.styles";
+import ParametersForm from "./components/ParametersForm";
 
 export type AnswerObject = {
   question: string;
@@ -124,9 +125,9 @@ function App() {
           </button>
         ) : null}
         {gameOver ? (
-          <button className="start" onClick={startTrivia}>
-            Start
-          </button>
+          <div>
+            <ParametersForm startGame={startTrivia}></ParametersForm>
+          </div>
         ) : null}
       </Wrapper>
     </>
